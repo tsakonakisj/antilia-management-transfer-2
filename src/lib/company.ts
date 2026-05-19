@@ -8,20 +8,16 @@ export interface CompanyConfig {
   registrationNumber: string;
   contractHeader: string;
   contractSubheader: string;
-  demoEmail: string;
-  demoPassword: string;
 }
 
 export const company: CompanyConfig = {
-  name: 'Demo Rent a Car',
+  name: 'Antilia Rent a Car',
   phone: '+30 28210 00000',
-  email: 'info@demo-rentacar.gr',
+  email: 'info@antilia.com',
   address: 'Χανιά, Κρήτη',
-  website: 'www.demo-rentacar.gr',
+  website: 'www.antilia.com',
   taxNumber: '000000000',
   registrationNumber: 'ΑΕ 00000',
-  contractHeader: 'DEMO RENT A CAR',
+  contractHeader: 'ANTILIA RENT A CAR',
   contractSubheader: 'Chania, Crete',
-  demoEmail: 'demo@rentacar.com',
-  demoPassword: 'demo123',
 };
