@@ -7,16 +7,18 @@ const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('admin@antilia.com');
   const [password, setPassword] = useState('Admin@2026!');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const { login } = useAuth();
   const { t } = useLanguage();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
     try {
       await login(email, password);
-    } catch (error) {
-      console.error('Login failed:', error);
+    } catch (err: any) {
+      setError(err?.message || 'Αποτυχία σύνδεσης. Ελέγξτε τα στοιχεία σας.');
     } finally {
       setLoading(false);
     }
@@ -65,6 +67,12 @@ const LoginForm: React.FC = () => {
               />
             </div>
           </div>
+
+          {error && (
+            <div className="rounded-md bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+              {error}
+            </div>
+          )}
 
           <div>
             <button

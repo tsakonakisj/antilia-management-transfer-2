@@ -81,11 +81,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
           if (userData) {
             setUser(userData);
-            // Update last login
             await supabase
               .from('users')
               .update({ last_login: new Date().toISOString() })
               .eq('id', userData.id);
+          } else {
+            throw new Error('Ο λογαριασμός δεν βρέθηκε στο σύστημα.');
           }
         }
       } else {
