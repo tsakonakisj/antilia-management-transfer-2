@@ -1,24 +1,22 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { company } from '../../lib/company';
 
 const LoginForm: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState(company.demoEmail);
+  const [password, setPassword] = useState('demo123');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
   const { login } = useAuth();
+  const { t } = useLanguage();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
     setLoading(true);
     try {
       await login(email, password);
-    } catch (err: any) {
-      setError(err?.message === 'Invalid login credentials'
-        ? 'Λανθασμένο email ή κωδικός πρόσβασης.'
-        : 'Αποτυχία σύνδεσης. Παρακαλώ δοκιμάστε ξανά.');
+    } catch (error) {
+      console.error('Login failed:', error);
     } finally {
       setLoading(false);
     }
@@ -37,12 +35,6 @@ const LoginForm: React.FC = () => {
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {error && (
-            <div className="rounded-md bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
-              {error}
-            </div>
-          )}
-
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email" className="sr-only">Email</label>
@@ -82,6 +74,12 @@ const LoginForm: React.FC = () => {
             >
               {loading ? 'Σύνδεση...' : 'Σύνδεση'}
             </button>
+          </div>
+
+          <div className="text-center">
+            <p className="text-sm text-gray-600">
+              Demo: {company.demoEmail} / {company.demoPassword}
+            </p>
           </div>
         </form>
       </div>
