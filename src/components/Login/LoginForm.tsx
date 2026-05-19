@@ -4,8 +4,8 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { company } from '../../lib/company';
 
 const LoginForm: React.FC = () => {
-  const [email, setEmail] = useState(company.demoEmail);
-  const [password, setPassword] = useState('demo123');
+  const [email, setEmail] = useState('admin@antilia.com');
+  const [password, setPassword] = useState('Admin@2026!');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const { t } = useLanguage();
@@ -78,7 +78,7 @@ const LoginForm: React.FC = () => {
 
           <div className="text-center">
             <p className="text-sm text-gray-600">
-              Demo: {company.demoEmail} / {company.demoPassword}
+              admin@antilia.com / Admin@2026!
             </p>
           </div>
         </form>

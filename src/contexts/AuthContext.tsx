@@ -25,8 +25,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             const { data: userData } = await supabase
               .from('users')
               .select('*')
-              .eq('email', session.user.email)
-              .single();
+              .eq('id', session.user.id)
+              .maybeSingle();
 
             if (userData) {
               setUser(userData);
@@ -76,8 +76,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           const { data: userData } = await supabase
             .from('users')
             .select('*')
-            .eq('email', data.user.email)
-            .single();
+            .eq('id', data.user.id)
+            .maybeSingle();
 
           if (userData) {
             setUser(userData);
